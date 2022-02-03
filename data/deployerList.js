@@ -5,6 +5,6 @@ deployerList.map((item) => {
   deployerNameList.push(item.name);
 })
 
-deployerNameList.push('I need other deployer, just don\'t set any core, see https://ext.vinejs.tech/core');
+deployerNameList.push('I need other deployer, see https://ext.vinejs.tech/deployer');
 
 module.exports = deployerNameList;

@@ -10,6 +10,12 @@ const log = {
   error(str) {
     console.log(chalk.bgRed.bold(" ERR! ") + '  ' + str);
   },
+  title(str) {
+    console.log(chalk.bgBlueBright.bold(`  --- ${str} ---  `));
+  },
+  dbLine(title, description) {
+    console.log(`※ ${chalk.cyan(title)}: \n   ${description}`);
+  },
   help() {
     console.log(chalk.bgBlueBright.bold(" INFO ") +  '  we need your help to fix this bug');
     console.log(

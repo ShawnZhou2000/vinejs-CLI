@@ -35,10 +35,8 @@ if (indexFlag) {
 }
 
 program
-  .command('list [option]')
+  .command('list')
   .description('list all available core and deployer')
-  .option('-c, --core', 'only show core list')
-  .option('-d, --deployer', 'only show deployer list')
   .action(() => {
     handleList(program.opts());
   })
@@ -58,9 +56,8 @@ program
   });
 
 program
-  .command('publish [options]')
+  .command('publish')
   .description('build a static site and upload to your server by use vine-deployer')
-  .option('-b, --build', `don't upload, only build static site`)
   .action(() => {
     handlePublish(program.opts());
   });

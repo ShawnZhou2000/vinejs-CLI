@@ -1,8 +1,7 @@
-const ora = require('ora');
-const log = require('../utils/colorLog');
-const chalk = require('chalk');
-
 const handleDebug = (userPort) => {
+  const ora = require('ora');
+  const log = require('../utils/colorLog');
+  const chalk = require('chalk');
   log.info('start local debug, please wait a moment...');
   const processDebug = ora('building project for local server...');
   processDebug.start();
