@@ -10,7 +10,6 @@ const log = require('./utils/colorLog');
 const packageData = require('./utils/packageData');
 const chalk = require('chalk');
 
-
 process.title = "Vine.js";
 let indexFlag = true;
 process.argv.forEach(item => {

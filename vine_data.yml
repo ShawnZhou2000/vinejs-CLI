@@ -1,5 +1,5 @@
 base:
-  gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
+  gitUrl: 'ShawnZhou2000/vinejs-web'
 
 core:
   blog: 
