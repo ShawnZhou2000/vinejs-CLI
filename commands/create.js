@@ -3,6 +3,8 @@ const log = require('../utils/colorLog');
 const coreList = require('../data/coreList');
 const deployerList = require('../data/deployerList');
 const repoList = require('../data/repoList');
+const gitClone = require('../utils/gitClone');
+console.log(coreList);
 
 const promptList = [
   {
@@ -22,9 +24,13 @@ const promptList = [
 const handleCreate = (name) => {
   log.info("project name: " + name);
   inquirer.prompt(promptList)
-    .then(ans => {
+    .then(async ans => {
       console.log(ans);
-      console.log(repoList);
+      let str = __dirname.split('\\');
+      str.pop();
+      str.push('draft');
+      str = str.join('\\');
+      await gitClone(repoList.base, '@vinejs/base', str);
     })
 };
 

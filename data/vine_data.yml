@@ -4,17 +4,39 @@ base:
 core:
   blog: 
     name: 'blog core'
-    gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
+    gitUrl: ''
     description: 'A simple personal blog just like Hexo, or WordPress.'
   h5: 
-    name: 'blog core'
-    gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
-    description: 'A simple personal blog just like Hexo, or WordPress.'
-  note: 
+    name: 'html5 web core'
+    gitUrl: ''
+    description: 'A container which allows you set other animate static site to show.'
+  note:
+    name: 'cloud note core'
+    gitUrl: ''
+    description: 'A personal note website based on Markdown, just like VuePress.'
   gallery: 
+    name: 'cloud gallery core'
+    gitUrl: ''
+    description: 'A simple gallery website, you can add your pictures by OSS or another way.'
   navigator: 
+    name: 'index navigator core'
+    gitUrl: ''
+    description: 'A simple page often used as a website homepage, or shortcut link navigation.' 
+
 deployer:
   git: 
+    name: 'Git deployer'
+    gitUrl: ''
+    description: 'Use Git to deploy website to a static web hosting service such as Vercel or Github Pages.'
   TCloudbase: 
-  AliyunServer: 
+    name: 'Tencent cloudbase deployer'
+    gitUrl: ''
+    description: 'Deploy your website to Tencent cloudbase serverless service.'
+  AliyunServer:
+    name: 'Aliyun server deployer'
+    gitUrl: 
+    description: 'Deploy your website to an Aliyun server.'
   AliyunOSS: 
+    name: 'Aliyun OSS deployer'
+    gitUrl: 
+    description: 'Deploy your website to an Aliyun OSS.'

@@ -4,14 +4,20 @@ const ora = require('ora');
 const log = require('../utils/colorLog');
 
 async function gitClone(repo, name, desc) {
-  const downloadProcess = ora(`download ${name} from ${repo}, please wait...`);
+  const downloadProcess = ora(`download ${name} from ${repo}, please wait...\n`);
   downloadProcess.start();
   const startTimeStamp = new Date();
-  await download(repo, desc);
-  downloadProcess.succeed();
-  const endTimeStamp = new Date();
-  const costTime = endTimeStamp - startTimeStamp;
-  log.info(`install ${name} successfully in ${costTime}s.`);
+  try {
+    await download(repo, desc);
+    downloadProcess.succeed();
+    const endTimeStamp = new Date();
+    const costTime = endTimeStamp - startTimeStamp;
+    log.info(`install ${name} successfully in ${costTime}s.`);
+  } catch (e) {
+    log.error('git clone error, please check your git config.');
+    log.error(e);
+    downloadProcess.fail(`download error, process is terminated.`);
+  }
 }
 
 module.exports = gitClone;
