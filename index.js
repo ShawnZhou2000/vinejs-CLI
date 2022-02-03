@@ -5,6 +5,7 @@ const handleCreate = require('./commands/create');
 const handleDebug = require('./commands/debug');
 const handlePublish = require('./commands/publish');
 const handleGuider = require('./commands/guider');
+const handleList = require('./commands/list');
 const log = require('./utils/colorLog');
 const packageData = require('./utils/packageData');
 const chalk = require('chalk');
@@ -13,7 +14,13 @@ const chalk = require('chalk');
 process.title = "Vine.js";
 let indexFlag = true;
 process.argv.forEach(item => {
-  if (item === 'create' || item === 'debug' || item === 'publish' || item === 'guider') {
+  if (
+    item === 'create' ||
+    item === 'debug' || 
+    item === 'publish' || 
+    item === 'guider' || 
+    item === 'list'
+    ) {
     indexFlag = false;
   }
 })
@@ -26,6 +33,15 @@ if (indexFlag) {
     log.warn(`You are using a DEBUG version of Vine, which can be unstable.`)
   }
 }
+
+program
+  .command('list [option]')
+  .description('list all available core and deployer')
+  .option('-c, --core', 'only show core list')
+  .option('-d, --deployer', 'only show deployer list')
+  .action(() => {
+    handleList(program.opts());
+  })
 
 program
   .command('create <name>')
@@ -44,6 +60,7 @@ program
 program
   .command('publish [options]')
   .description('build a static site and upload to your server by use vine-deployer')
+  .option('-b, --build', `don't upload, only build static site`)
   .action(() => {
     handlePublish(program.opts());
   });
@@ -54,7 +71,5 @@ program
   .action((userPort) => {
     handleGuider(userPort);
   });
-
-program.option('-b, --build', `don't upload, only build static site when you run command 'vine publish'`)
 
 program.parse(process.argv);

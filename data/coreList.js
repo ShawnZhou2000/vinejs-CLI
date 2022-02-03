@@ -1,5 +1,5 @@
 const ymlConfig = require('./getYMLConfig');
-const coreList = ymlConfig(__dirname, '/vine_data.yml', 'core');
+const coreList = ymlConfig('', './vine_data.yml', 'core');
 let coreNameList = [];
 coreList.map((item) => {
   coreNameList.push(item.name);
