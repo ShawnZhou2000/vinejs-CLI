@@ -1,0 +1,20 @@
+base:
+  gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
+
+core:
+  blog: 
+    name: 'blog core'
+    gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
+    description: 'A simple personal blog just like Hexo, or WordPress.'
+  h5: 
+    name: 'blog core'
+    gitUrl: https://github.com/ShawnZhou2000/vinejs-web.git
+    description: 'A simple personal blog just like Hexo, or WordPress.'
+  note: 
+  gallery: 
+  navigator: 
+deployer:
+  git: 
+  TCloudbase: 
+  AliyunServer: 
+  AliyunOSS: 
