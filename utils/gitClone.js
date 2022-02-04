@@ -4,7 +4,7 @@ const ora = require('ora');
 const log = require('../utils/colorLog');
 
 async function gitClone(repo, name, desc) {
-  const downloadProcess = ora(`download ${name} from ${repo}, please wait...`);
+  const downloadProcess = ora(`download ${name} from ${repo}, please wait...\n`);
   downloadProcess.start();
   const startTimeStamp = new Date();
   try {
@@ -19,6 +19,7 @@ async function gitClone(repo, name, desc) {
     log.error(e);
     console.log(e);
     downloadProcess.fail(`download error, process is terminated.`);
+    log.help();
   }
 }
 

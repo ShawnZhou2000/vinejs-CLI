@@ -44,7 +44,7 @@ program
   .command('create <name>')
   .description('create a new vine project')
   .action((name) => {
-    handleCreate(name, __dirname);
+    handleCreate(name, process.cwd());
   });
 
 program

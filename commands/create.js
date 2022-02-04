@@ -4,6 +4,8 @@ const handleCreate = (name, dir) => {
   const coreList = require('../data/coreList');
   const deployerList = require('../data/deployerList');
   const gitClone = require('../utils/gitClone');
+  const baseGit = require('../data/vineBaseGit');
+  const path = require('path');
 
   const promptList = [
     {
@@ -19,17 +21,12 @@ const handleCreate = (name, dir) => {
       choices: deployerList
     }
   ];
-
-  log.info("project name: " + name);
-  log.info("process will create a new project at " + dir);
+  const targetDir = path.resolve(dir, name);
+  log.info("Vine process will create a new project at " + targetDir);
   inquirer.prompt(promptList)
     .then(async ans => {
       console.log(ans);
-      // let str = __dirname.split('\\');
-      // str.pop();
-      // str.push('draft');
-      // str = str.join('\\');
-      // await gitClone(baseGit, '@vinejs/base', str);
+      await gitClone(baseGit, '@vinejs/base', targetDir);
     })
 };
 

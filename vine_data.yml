@@ -1,3 +1,6 @@
+base:
+  gitUrl: 'ShawnZhou2000/vinejs-base'
+
 core:
   blog: 
     name: 'blog core'
