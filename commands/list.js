@@ -1,10 +1,10 @@
-const ymlConfig = require('../data/getYMLConfig');
-const deployerList = ymlConfig('', './vine_data.yml', 'deployer');
-const coreList = ymlConfig('', './vine_data.yml', 'core');
-const chalk = require('chalk');
-const log = require('../utils/colorLog');
+const handleList = (dir) => {
+  const ymlConfig = require('../data/getYMLConfig');
+  const deployerList = ymlConfig(dir, './vine_data.yml', 'deployer');
+  const coreList = ymlConfig(dir, './vine_data.yml', 'core');
+  const chalk = require('chalk');
+  const log = require('../utils/colorLog');
 
-const handleList = (opts) => {
   log.title('Available Core List');
   coreList.forEach(item => {
     log.dbLine(item.name, item.description);

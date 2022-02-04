@@ -37,14 +37,14 @@ program
   .command('list')
   .description('list all available core and deployer')
   .action(() => {
-    handleList(program.opts());
+    handleList( __dirname);
   })
 
 program
   .command('create <name>')
   .description('create a new vine project')
   .action((name) => {
-    handleCreate(name);
+    handleCreate(name, __dirname);
   });
 
 program
