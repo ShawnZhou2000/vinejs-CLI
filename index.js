@@ -1,16 +1,8 @@
 #!/usr/bin/env node
-
-const { program } = require('commander');
-const handleCreate = require('./commands/create');
-const handleDebug = require('./commands/debug');
-const handlePublish = require('./commands/publish');
-const handleGuider = require('./commands/guider');
-const handleList = require('./commands/list');
 const log = require('./utils/colorLog');
 const packageData = require('./utils/packageData');
 const chalk = require('chalk');
 const semver = require('semver');
-const requiredVersion = require('./utils/packageData').engines.node;
 
 function checkNodeVersion (wanted, id) {
   if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
@@ -28,7 +20,8 @@ process.argv.forEach(item => {
     item === 'debug' || 
     item === 'publish' || 
     item === 'guider' || 
-    item === 'list'
+    item === 'list' ||
+    item === 'build'
     ) {
     indexFlag = false;
   }
@@ -41,8 +34,17 @@ if (indexFlag) {
   if (packageData.stage) {
     log.warn(`You are using a DEBUG version of Vine, which can be unstable.`)
   }
-  checkNodeVersion(requiredVersion, 'Vine.js');
+  checkNodeVersion(packageData.engines.node, 'Vine.js');
 }
+
+
+const { program } = require('commander');
+const handleCreate = require('./commands/create');
+const handleDebug = require('./commands/debug');
+const handlePublish = require('./commands/publish');
+const handleGuider = require('./commands/guider');
+const handleList = require('./commands/list');
+const handleBuild = require('./commands/build');
 
 program
   .command('list')
@@ -59,6 +61,13 @@ program
   });
 
 program
+  .command('build')
+  .description('build static pages to dist folder')
+  .action(() => {
+    handleBuild();
+  });
+
+program
   .command('debug [port]')
   .description('start a local server to debug your vine project')
   .action((port) => {
@@ -67,7 +76,7 @@ program
 
 program
   .command('publish')
-  .description('build a static site and upload to your server by use vine-deployer')
+  .description('build a static site and upload to your server by using vine-deployer')
   .action(() => {
     handlePublish(program.opts());
   });
