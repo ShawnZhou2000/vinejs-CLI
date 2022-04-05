@@ -40,3 +40,9 @@ deployer:
     name: 'Aliyun OSS deployer'
     gitUrl: 'ShawnZhou2000/vinejs-AliOSS-deployer'
     description: 'Deploy your website to an Aliyun OSS.'
+
+devServer:
+  debug:
+    port: 8765
+  ui:
+    port: 8080

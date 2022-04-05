@@ -9,6 +9,16 @@ const handleList = require('./commands/list');
 const log = require('./utils/colorLog');
 const packageData = require('./utils/packageData');
 const chalk = require('chalk');
+const semver = require('semver');
+const requiredVersion = require('./utils/packageData').engines.node;
+
+function checkNodeVersion (wanted, id) {
+  if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
+    log.error(`You are using Node ${process.version}, but this version of ${id} requires Node ${wanted}.`);
+    log.error(`Please upgrade your Node version.`);
+    process.exit(1);
+  }
+}
 
 process.title = "Vine.js";
 let indexFlag = true;
@@ -31,6 +41,7 @@ if (indexFlag) {
   if (packageData.stage) {
     log.warn(`You are using a DEBUG version of Vine, which can be unstable.`)
   }
+  checkNodeVersion(requiredVersion, 'Vine.js');
 }
 
 program
