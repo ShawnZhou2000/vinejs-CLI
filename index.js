@@ -89,3 +89,10 @@ program
   });
 
 program.parse(process.argv);
+
+process.on('SIGINT', function() {
+  // 监听ctrl + c
+  log.bye();
+
+  process.exit();
+})
