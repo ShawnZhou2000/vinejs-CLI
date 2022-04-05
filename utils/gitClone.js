@@ -4,16 +4,15 @@ const ora = require('ora');
 const log = require('../utils/colorLog');
 
 async function gitClone(repo, name, desc) {
+  if (!repo) {
+    log.info('not selected')
+    return;
+  }
   const downloadProcess = ora(`download ${name} from ${repo}, please wait...\n`);
   downloadProcess.start();
-  const startTimeStamp = new Date();
   try {
     await download(repo, desc);
     downloadProcess.succeed(`download ${name} successfully.`);
-    const endTimeStamp = new Date();
-    const costTime = endTimeStamp - startTimeStamp;
-    log.info(`Vine.js installed successfully in ${costTime / 1000}s.`);
-    log.info(`try run 'vine debug' to preview your new website!`);
   } catch (e) {
     log.error('git clone error, please check your git config.');
     log.error(e);
