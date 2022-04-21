@@ -4,11 +4,25 @@ const packageData = require('./utils/packageData');
 const chalk = require('chalk');
 const semver = require('semver');
 
-function checkNodeVersion (wanted, id) {
+function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
     log.error(`You are using Node ${process.version}, but this version of ${id} requires Node ${wanted}.`);
     log.error(`Please upgrade your Node version.`);
     process.exit(1);
+  } else {
+    log.info(`Node.js ${process.version} detected`);
+  }
+}
+
+function checkGit() {
+  const cmd = require('node-cmd');
+  let ans = cmd.runSync(`git --version`);
+  if (ans.err) {
+    log.error(`It seems you haven't install Git, Vine.js can't work without Git.`);
+    log.error(`Please install Git correctly.`);
+    process.exit(1);
+  } else {
+    // TODO: show Git version correctly.
   }
 }
 
@@ -34,6 +48,7 @@ if (indexFlag) {
   if (packageData.stage) {
     log.warn(`You are using a DEBUG version of Vine, which can be unstable.`)
   }
+  checkGit();
   checkNodeVersion(packageData.engines.node, 'Vine.js');
 }
 
