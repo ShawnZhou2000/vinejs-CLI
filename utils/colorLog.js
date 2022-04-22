@@ -41,7 +41,7 @@ const log = {
   title(str) {
     console.log(chalk.bgBlueBright.bold(`  --- ${str} ---  `));
   },
-  bye (str) {
+  bye() {
     console.log(chalk.bgBlueBright.bold(" BYE~ ") + '  ' + getRandomBye() + ' ' + getRandomEmoji());
   },
   dbLine(title, description) {

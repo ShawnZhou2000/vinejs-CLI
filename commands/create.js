@@ -47,7 +47,7 @@ const handleCreate = async (name, dir) => {
     await cmd.run(`cd ${targetDir}/core && npm install`, function(err, data, stderr) {
       if (err) {
         npmInstallProcess.error(`failed to install Vine.js core.\n`);
-        log.err(stderr);
+        log.error(stderr);
       } else {
         npmInstallProcess.succeed(`Vine.js core successfully installed.\n`);
         log.info(data);
