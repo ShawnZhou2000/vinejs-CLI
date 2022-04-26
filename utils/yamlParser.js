@@ -11,7 +11,7 @@ module.exports = function (localDir, pathName) {
   } catch (e) {
     log.error(`error in reading yaml files '${pathName}', please check your config.`);
     log.error(e);
-    log.help();
+    // log.help();
     process.exit(1);
   } finally {
     return yamlData;

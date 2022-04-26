@@ -1,6 +1,6 @@
 {
   "name": "@vinejs/base",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "hello world",
   "main": "index.js",
   "stage": true,

@@ -1,11 +1,10 @@
 const log = require('../utils/colorLog');
+const ora = require('ora');
 
-const handlePublish = (options) => {
-  console.log("executing publish command");
-  // if (options.build) {
-  //   // only build mode
-  //   log.warn("You are using only-build mode to execute publish command.")
-  // }
+const handlePublish = () => {
+  log.info('Start to publish your website...');
+  const publishFn = require('./deployer/bin/index.js');
+  publishFn();
 }
 
 module.exports = handlePublish;
