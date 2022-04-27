@@ -1,9 +1,9 @@
 const log = require('../utils/colorLog');
-const ora = require('ora');
+const path = require('path');
 
 const handlePublish = () => {
   log.info('Start to publish your website...');
-  const publishFn = require('./deployer/bin/index.js');
+  const publishFn = require(path.resolve(process.cwd(), 'deployer/bin/index.js'));
   publishFn();
 }
 

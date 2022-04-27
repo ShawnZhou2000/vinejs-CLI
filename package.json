@@ -1,7 +1,7 @@
 {
-  "name": "@vinejs/base",
-  "version": "0.0.3",
-  "description": "hello world",
+  "name": "@vinejs/cli",
+  "version": "0.0.4",
+  "description": "Vine.js Command Line Interface",
   "main": "index.js",
   "stage": true,
   "scripts": {

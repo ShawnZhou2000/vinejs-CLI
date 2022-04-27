@@ -38,7 +38,7 @@ deployer:
     description: 'Deploy your website to an Aliyun server.'
   AliyunOSS: 
     name: 'Aliyun OSS deployer'
-    gitUrl: 'ShawnZhou2000/vinejs-AliOSS-deployer'
+    gitUrl: 'ShawnZhou2000/vinejs-aliyun-oss-deployer'
     description: 'Deploy your website to an Aliyun OSS.'
 
 devServer:
