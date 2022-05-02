@@ -34,26 +34,44 @@ const handleCreate = async (name, dir) => {
     let coreGit = vineGitRepo("core", ans.core);
     let deployerGit = vineGitRepo("deployer", ans.deployer);
     // calculate summary install time by date stamp
-    const startTimeStamp = new Date();
+    let startTimeStamp = new Date();
 
     // step 1. clone repo
     await gitClone(baseGit, "@vinejs/base", targetDir);
     await gitClone(coreGit, "@vinejs/core", targetDir + "/core");
     await gitClone(deployerGit, "@vinejs/deployer", targetDir + "/deployer");
 
-    // step 2. npm install
-    const npmInstallProcess = ora(`Vine.js core installing, please wait...\n`);
-    npmInstallProcess.start();
+    // step 2. npm install(core)
+    const npmInstallProcess_Core = ora(`Vine.js core installing, please wait...\n`);
+    npmInstallProcess_Core.start();
     await cmd.run(`cd ${targetDir}/core && npm install`, function(err, data, stderr) {
       if (err) {
-        npmInstallProcess.error(`failed to install Vine.js core.\n`);
+        npmInstallProcess_Core.error(`failed to install Vine.js core.\n`);
         log.error(stderr);
       } else {
-        npmInstallProcess.succeed(`Vine.js core successfully installed.\n`);
+        npmInstallProcess_Core.succeed(`Vine.js core successfully installed.\n`);
         log.info(data);
         const endTimeStamp = new Date();
         const costTime = endTimeStamp - startTimeStamp;
-        log.info(`Vine.js installed successfully in ${costTime / 1000}s.`);
+        log.info(`Vine.js core installed successfully in ${costTime / 1000}s.`);
+      }
+    });
+
+    // step 3. npm install(deployer)
+    startTimeStamp = new Date();
+    const npmInstallProcess_Deployer = ora(`Vine.js deployer installing, please wait...\n`);
+    npmInstallProcess_Deployer.start();
+    await cmd.run(`cd ${targetDir}/deployer && npm install`, function(err, data, stderr) {
+      if (err) {
+        npmInstallProcess_Deployer.error(`failed to install Vine.js deployer.\n`);
+        log.error(stderr);
+      } else {
+        npmInstallProcess_Deployer.succeed(`Vine.js deployer successfully installed.\n`);
+        log.info(data);
+        const endTimeStamp = new Date();
+        const costTime = endTimeStamp - startTimeStamp;
+        log.info(`Vine.js deployer installed successfully in ${costTime / 1000}s.`);
+        log.info(`Well done, Vine.js completely installed.`);
         log.info(`try run 'cd ${name} && vine debug' to preview your new website!`);
       }
     });
