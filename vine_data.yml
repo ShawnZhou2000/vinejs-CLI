@@ -43,6 +43,6 @@ deployer:
 
 devServer:
   debug:
-    port: 8765
+    port: 1024
   ui:
     port: 8080
