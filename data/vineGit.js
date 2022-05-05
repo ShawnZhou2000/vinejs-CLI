@@ -5,7 +5,7 @@ module.exports = (objKey, componentName) => {
   let res = null;
   Object.keys(config).forEach(key => {
     if (config[key].name === componentName) {
-      res = config[key].gitUrl;
+      res = config[key];
     }
   })
   return res;

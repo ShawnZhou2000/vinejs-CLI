@@ -1,6 +1,6 @@
 {
   "name": "vinejs-cli",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Vine.js Command Line Interface",
   "main": "index.js",
   "stage": true,

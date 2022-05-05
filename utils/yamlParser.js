@@ -6,7 +6,7 @@ let yamlData = {};
 
 module.exports = function (localDir, pathName) {
   try {
-    const dir = path.join(localDir, pathName);
+    const dir = path.resolve(localDir, pathName);
     yamlData = yaml.load(fs.readFileSync(dir, 'utf-8'));
   } catch (e) {
     log.error(`error in reading yaml files '${pathName}', please check your config.`);

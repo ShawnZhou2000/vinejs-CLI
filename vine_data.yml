@@ -26,19 +26,19 @@ core:
 deployer:
   git: 
     name: 'Git deployer'
-    gitUrl: 'ShawnZhou2000/vinejs-git-deployer'
+    npmName: 'vinejs-git-deployer'
     description: 'Use Git to deploy website to a static web hosting service such as Vercel or Github Pages.'
   TCloudbase: 
     name: 'Tencent cloudbase deployer'
-    gitUrl: 'ShawnZhou2000/vinejs-TCloudbase-deployer'
+    npmName: 'vinejs-tencent-cloudbase-deployer'
     description: 'Deploy your website to Tencent cloudbase serverless service.'
   AliyunServer:
     name: 'Aliyun server deployer'
-    gitUrl: 'ShawnZhou2000/vinejs-Aliyun-deployer'
+    npmName: 'vinejs-aliyun-server-deployer'
     description: 'Deploy your website to an Aliyun server.'
   AliyunOSS: 
     name: 'Aliyun OSS deployer'
-    gitUrl: 'ShawnZhou2000/vinejs-aliyun-oss-deployer'
+    npmName: 'vinejs-aliyun-oss-deployer'
     description: 'Deploy your website to an Aliyun OSS.'
 
 devServer:
