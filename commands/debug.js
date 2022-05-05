@@ -12,11 +12,12 @@ const packageData = require('../utils/packageData');
 
 const handleDebug = async (userPort) => {
   const ascii = `
-  _    __ _            
- | |  / /(_)____   ___ 
- | | / // // __ \\ / _ \\
- | |/ // // / / //  __/
- |___//_//_/ /_/ \\___/   Vine.js v${packageData.version}              
+ _    __ _                    _      
+| |  / /(_)____   ___        (_)_____
+| | / // // __ \\ / _ \\      / // ___/
+| |/ // // / / //  __/_    / /(__  ) 
+|___//_//_/ /_/ \\___/(_)__/ //____/  
+   ${chalk.blueBright('INSPIRE CREATIVE')}    /___/  Vine.js ${chalk.white('v' + packageData.version)}              
  `
   console.log(chalk.green(ascii));
   // build project before debug

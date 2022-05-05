@@ -19,7 +19,7 @@ const handleBuild = async (callback) => {
     process.exit(1);
   }
   coreConfig = yamlParser(corePath, 'vine.core.yml');
-  // console.log(coreConfig);
+  console.log(coreConfig);
   log.info('🚀 start building project to dist folder!');
   const buildProcess = ora('building, please wait a moment...\n');
   buildProcess.start();
