@@ -7,6 +7,8 @@ const path = require('path');
 const yamlParser = require('../utils/yamlParser');
 const chalk = require('chalk');
 let coreConfig;
+let buildProcess;
+let serviceLog;
 
 function convertEachMdAtCache(dir) {
   let pathLikeName = path.resolve(process.cwd(), '.vine_cache/posts', dir);
@@ -20,12 +22,20 @@ function convertEachMdAtCache(dir) {
     // 走到这里说明是 .md 或 .vue 文件
     const prefixType = dir.replace(/\/\S+\.md/, '').replace(/.md/, '');
     let file = fs.readFileSync(pathLikeName, 'utf-8');
+    let fileBuffer = [];
     switch (coreConfig.name) {
       case 'blog core':
-        let fileBuffer = file.split('---');
-        fileBuffer.unshift('---');
-        fileBuffer.splice(3, 0, `---\n<layout :render="'${prefixType}'" />\n<article>`);
-        fileBuffer.push(`\n</article>\n`);
+        if (prefixType === 'index' || prefixType === 'category') {
+          fileBuffer = file.split('');
+          fileBuffer.unshift(`<layout :render="'${prefixType}'" />\n`);
+        }
+
+        if (prefixType === 'articles' || prefixType === 'about') {
+          fileBuffer = file.split('---');
+          fileBuffer.unshift('---');
+          fileBuffer.splice(3, 0, `---\n<layout :render="'${prefixType}'" />\n<article>`);
+          fileBuffer.push(`\n</article>\n`);
+        }
         file = fileBuffer.join('');
         fs.writeFileSync(pathLikeName, file);
         log.info(`Resolve post files: ${chalk.blueBright(dir)}`);
@@ -39,10 +49,14 @@ function convertEachMdAtCache(dir) {
 }
 
 const handleBuild = async (callback) => {
-  log.logo();
-  log.info('Start building static website...');
   // Step 1. 检查主核心配置文件是否存在
+  // Step 2. 将posts文件夹复制到.vine_cache中
+  // Step 3. 给每个文件添加组件标记
+  const cacheDirName = path.resolve(process.cwd(), '.vine_cache');
+  const postsDirName = path.resolve(process.cwd(), 'core/posts');
+  const cachePostDirName = path.resolve(cacheDirName, 'posts');
   const corePath = path.resolve(process.cwd(), 'core');
+  log.logo();
   if (!fs.existsSync(corePath)) {
     log.error('failed to find Vine.js core, did you installed it correctly?');
     process.exit(1);
@@ -54,46 +68,57 @@ const handleBuild = async (callback) => {
     process.exit(1);
   }
   coreConfig = yamlParser(corePath, 'vine.core.yml');
-
-  // Step 2. 将posts文件夹复制到.vine_cache中
-  // Step 3. 给每个文件添加组件标记
-  const cacheDirName = path.resolve(process.cwd(), '.vine_cache');
-  const postsDirName = path.resolve(process.cwd(), 'core/posts');
-  const cachePostDirName = path.resolve(cacheDirName, 'posts');
-  fsex.remove(cacheDirName)
-  .then(() => {
-    log.info('Cleared .vine_cache folder.');
-    fsex.ensureDirSync(cacheDirName);
-    return fsex.copy(postsDirName, cachePostDirName);
-  })
-  .then(() => {
-    const cachePostDir = fs.readdirSync(cachePostDirName);
-    cachePostDir.forEach(dir => {
-      convertEachMdAtCache(dir);
+  log.info('Connecting Vine.js base environment...');
+  serviceLog = await cmd.run('cd base && npm run dev');
+  setTimeout(() => {
+    fn();
+  }, 6000);
+  function fn() {
+    fsex.remove(cacheDirName)
+    .then(() => {
+      log.info('Cleared .vine_cache folder.');
+      fsex.ensureDirSync(cacheDirName);
+      return fsex.copy(postsDirName, cachePostDirName);
     })
-  })
-  .catch(err => {
-    log.error('Failed to build.');
-    log.error(err);
-    process.exit(1);
-  })
-  
-
-  // TODO: 在这里添加扩展件整合逻辑
-  log.info('🚀 start building project to dist folder!');
-  const buildProcess = ora('building, please wait a moment...\n');
-  buildProcess.start();
-  await cmd.run('cd core && npm run build', function(err, data, stderr) {
-    if (err) {
-      log.error(stderr);
-      buildProcess.fail('failed to build this project.');
-    } else {
+    .then(() => {
+      const cachePostDir = fs.readdirSync(cachePostDirName);
+      cachePostDir.forEach(dir => {
+        convertEachMdAtCache(dir);
+      })
+    })
+    .catch(err => {
+      log.error('Failed to build.');
+      log.error(err);
+      process.exit(1);
+    })
+    .then(() => {
+      log.info('🚀 start building project to dist folder!');
+      buildProcess = ora('building, please wait a moment...\n');
+      buildProcess.start();
+      return new Promise((resolve, reject) => {
+        cmd.run('cd core && npm run build', function(err, data, stderr) {
+          if (err) {
+            reject(stderr);
+          } else {
+            resolve(data);
+          }
+        });
+      })
+    })
+    .then(res => {
+      console.log(res);
       buildProcess.succeed('😎 Vine.js build successfully!');
+      cmd.runSync(`taskkill /pid ${serviceLog.pid} -t -f`);
+      // fsex.remove(cacheDirName);
       if (callback) {
         callback();
       }
-    }
-  });
+    })
+    .catch(err => {
+      log.error(err);
+      buildProcess.fail('failed to build this project.');
+    })
+  }
 };
 
 module.exports = handleBuild;

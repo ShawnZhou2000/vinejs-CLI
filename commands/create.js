@@ -37,6 +37,8 @@ const handleCreate = async (name, dir) => {
       choices: deployerList,
     },
   ];
+  log.logo();
+
   // get target path and print path
   const targetDir = path.resolve(dir, name);
   log.info("Vine process will create a new project at " + targetDir);

@@ -9,7 +9,6 @@ const ymlConfig = require('../data/getYMLConfig')(__dirname, '../vine_data.yml',
 const handleBuild = require('./build.js');
 
 const handleDebug = async (userPort) => {
-  log.logo();
   // build project before debug
   await handleBuild(() => {
     app.use(serve(path, { extensions:["html"] }));
