@@ -1,6 +1,6 @@
 {
   "name": "vinejs-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vine.js Command Line Interface",
   "main": "index.js",
   "stage": true,
@@ -16,6 +16,7 @@
     "chalk": "~4.1.2",
     "commander": "^9.0.0",
     "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.1.0",
     "inquirer": "^8.2.0",
     "js-yaml": "^4.1.0",
     "koa": "^2.13.4",

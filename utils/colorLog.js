@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const packageData = require('../utils/packageData');
 
 const byeList = [
   'have a nice day',
@@ -29,6 +30,17 @@ function getRandomEmoji() {
 }
 
 const log = {
+  logo() {
+    const ascii = `
+ _    __ _                    _      
+| |  / /(_)____   ___        (_)_____
+| | / // // __ \\ / _ \\      / // ___/
+| |/ // // / / //  __/_    / /(__  ) 
+|___//_//_/ /_/ \\___/(_)__/ //____/  
+   ${chalk.blueBright('INSPIRE CREATIVE')}    /___/  Vine.js ${chalk.white('v' + packageData.version)}              
+ `
+  console.log(chalk.green(ascii));
+  },
   info(str) {
     console.log(chalk.bgGreen.bold(" INFO ") + ' ✨ ' + str);
   },

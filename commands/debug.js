@@ -7,19 +7,9 @@ const path = require('path').resolve(process.cwd(), 'dist');
 const app = new Koa();
 const ymlConfig = require('../data/getYMLConfig')(__dirname, '../vine_data.yml', 'devServer');
 const handleBuild = require('./build.js');
-const packageData = require('../utils/packageData');
-
 
 const handleDebug = async (userPort) => {
-  const ascii = `
- _    __ _                    _      
-| |  / /(_)____   ___        (_)_____
-| | / // // __ \\ / _ \\      / // ___/
-| |/ // // / / //  __/_    / /(__  ) 
-|___//_//_/ /_/ \\___/(_)__/ //____/  
-   ${chalk.blueBright('INSPIRE CREATIVE')}    /___/  Vine.js ${chalk.white('v' + packageData.version)}              
- `
-  console.log(chalk.green(ascii));
+  log.logo();
   // build project before debug
   await handleBuild(() => {
     app.use(serve(path, { extensions:["html"] }));
