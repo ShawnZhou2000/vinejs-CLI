@@ -28,15 +28,9 @@ function checkGit() {
 
 process.title = "Vine.js";
 let indexFlag = true;
+const commandIndex = ['create', 'debug', 'publish', 'guider', 'list', 'build', 'help', 'base'];
 process.argv.forEach(item => {
-  if (
-    item === 'create' ||
-    item === 'debug' || 
-    item === 'publish' || 
-    item === 'guider' || 
-    item === 'list' ||
-    item === 'build'
-    ) {
+  if (commandIndex.includes(item)) {
     indexFlag = false;
   }
 })
@@ -60,6 +54,7 @@ const handlePublish = require('./commands/publish');
 const handleGuider = require('./commands/guider');
 const handleList = require('./commands/list');
 const handleBuild = require('./commands/build');
+const handleBase = require('./commands/base');
 
 program
   .command('list')
@@ -101,6 +96,13 @@ program
   .description('launch a guider user interface to manage your vine project')
   .action((userPort) => {
     handleGuider(userPort);
+  });
+
+program
+  .command('base')
+  .description(`${chalk.redBright('ONLY IN DEBUG MODE.')} enable Vine.js base uni-backend service.`)
+  .action(() => {
+    handleBase(program.opts());
   });
 
 program.parse(process.argv);
