@@ -4,40 +4,49 @@ base:
 core:
   blog: 
     name: 'blog core'
+    alias: 'Blog Core'
     gitUrl: 'ShawnZhou2000/vinejs-blog-core'
     description: 'A simple personal blog just like Hexo, or WordPress.'
   h5: 
     name: 'html5 web core'
+    alias: 'H5 Core'
     gitUrl: 'ShawnZhou2000/vinejs-h5-core'
     description: 'A container which allows you set other animate static site to show.'
   note:
     name: 'cloud note core'
+    alias: 'Note Core'
     gitUrl: 'ShawnZhou2000/vinejs-note-core'
     description: 'A personal note website based on Markdown, just like VuePress.'
   gallery: 
     name: 'cloud gallery core'
+    alias: 'Gallery Core'
     gitUrl: 'ShawnZhou2000/vinejs-gallery-core'
     description: 'A simple gallery website, you can add your pictures by OSS or another way.'
   navigator: 
     name: 'index navigator core'
+    alias: 'Navigator Core'
     gitUrl: 'ShawnZhou2000/vinejs-navigator-core'
     description: 'A simple page often used as a website homepage, or shortcut link navigation.' 
 
 deployer:
   git: 
     name: 'Git deployer'
+    alias: 'Git Deployer'
     npmName: 'vinejs-git-deployer'
     description: 'Use Git to deploy website to a static web hosting service such as Vercel or Github Pages.'
   TCloudbase: 
     name: 'Tencent cloudbase deployer'
+    alias: 'Tencent Cloudbase Deployer'
     npmName: 'vinejs-tencent-cloudbase-deployer'
     description: 'Deploy your website to Tencent cloudbase serverless service.'
   AliyunServer:
     name: 'Aliyun server deployer'
+    alias: 'Aliyun Server Deployer'
     npmName: 'vinejs-aliyun-server-deployer'
     description: 'Deploy your website to an Aliyun server.'
   AliyunOSS: 
     name: 'Aliyun OSS deployer'
+    alias: 'Aliyun OSS Deployer'
     npmName: 'vinejs-aliyun-oss-deployer'
     description: 'Deploy your website to an Aliyun OSS.'
 

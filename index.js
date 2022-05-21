@@ -69,10 +69,10 @@ program
   })
 
 program
-  .command('create <name>')
+  .command('create <name> [workspace] [core] [deployer]')
   .description('create a new vine project')
-  .action((name) => {
-    handleCreate(name, process.cwd());
+  .action((name, workspace, core, deployer) => {
+    handleCreate(name, process.cwd(), workspace, core, deployer);
   });
 
 program
